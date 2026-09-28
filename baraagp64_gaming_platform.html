@@ -1,0 +1,681 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>baraagp64 - Ultimate Online Gaming Platform</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        darkbg: '#0a0b10',
+                        cardbg: '#131520',
+                        accentpurple: '#8b5cf6',
+                        accentcyan: '#06b6d4',
+                        neonpink: '#ec4899'
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Press+Start+2P&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Inter', sans-serif; background-color: #0a0b10; color: #f3f4f6; }
+        .retro-font { font-family: 'Press Start 2P', monospace; }
+        .glow-purple { box-shadow: 0 0 25px rgba(139, 92, 246, 0.4); }
+        .glow-cyan { box-shadow: 0 0 25px rgba(6, 182, 212, 0.4); }
+        .glow-text { text-shadow: 0 0 10px rgba(139, 92, 246, 0.7), 0 0 20px rgba(6, 182, 212, 0.5); }
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #0a0b10; }
+        ::-webkit-scrollbar-thumb { background: #1f2937; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: #8b5cf6; }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col selection:bg-accentpurple selection:text-white">
+
+    <!-- Navigation Header -->
+    <header class="sticky top-0 z-40 bg-darkbg/90 backdrop-blur-md border-b border-gray-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+            <div class="flex items-center space-x-3">
+                <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-accentpurple to-accentcyan flex items-center justify-center glow-purple">
+                    <i data-lucide="Gamepad2" class="w-6 h-6 text-white"></i>
+                </div>
+                <div>
+                    <h1 class="text-xl sm:text-2xl font-extrabold tracking-wider bg-gradient-to-r from-accentcyan via-accentpurple to-neonpink bg-clip-text text-transparent retro-font text-sm sm:text-lg">baraagp64</h1>
+                    <p class="text-xs text-gray-400">Next-Gen Retro & Arcade Hub</p>
+                </div>
+            </div>
+
+            <!-- Search Bar in Header -->
+            <div class="hidden md:flex flex-1 max-w-md mx-8">
+                <div class="relative w-full">
+                    <span class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-gray-400">
+                        <i data-lucide="search" class="w-4 h-4"></i>
+                    </span>
+                    <input type="text" id="searchInput" placeholder="Search 50+ retro & arcade games..." 
+                        class="w-full pl-10 pr-4 py-2 bg-cardbg border border-gray-800 rounded-xl text-sm focus:outline-none focus:border-accentpurple transition-all text-gray-200 placeholder-gray-500">
+                </div>
+            </div>
+
+            <div class="flex items-center space-x-3">
+                <button onclick="filterCategory('All')" class="hidden sm:inline-flex px-3 py-1.5 text-xs font-semibold bg-gray-900 border border-gray-800 hover:border-accentcyan rounded-lg transition-all text-gray-300">
+                    Browse All
+                </button>
+                <button onclick="toggleAdminModal(true)" class="flex items-center space-x-2 px-4 py-2 bg-gradient-to-r from-accentpurple to-accentcyan hover:opacity-90 transition-all rounded-xl text-white font-semibold text-sm shadow-lg glow-purple">
+                    <i data-lucide="shield-alert" class="w-4 h-4"></i>
+                    <span>Baraa's Console</span>
+                </button>
+            </div>
+        </div>
+        <!-- Mobile Search Bar -->
+        <div class="md:hidden px-4 pb-3">
+            <div class="relative w-full">
+                <span class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-gray-400">
+                    <i data-lucide="search" class="w-4 h-4"></i>
+                </span>
+                <input type="text" id="mobileSearchInput" placeholder="Search games..." 
+                    class="w-full pl-10 pr-4 py-2 bg-cardbg border border-gray-800 rounded-xl text-sm focus:outline-none focus:border-accentpurple transition-all text-gray-200 placeholder-gray-500">
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Banner -->
+    <section class="relative py-12 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto w-full">
+        <div class="relative rounded-3xl overflow-hidden bg-gradient-to-r from-purple-950/40 via-cardbg to-cyan-950/40 border border-gray-800 p-8 sm:p-12">
+            <div class="absolute -right-10 -bottom-10 w-96 h-96 bg-accentpurple/10 rounded-full blur-3xl pointer-events-none"></div>
+            <div class="absolute -left-10 -top-10 w-96 h-96 bg-accentcyan/10 rounded-full blur-3xl pointer-events-none"></div>
+            
+            <div class="relative z-10 max-w-2xl">
+                <span class="inline-flex items-center space-x-1 px-3 py-1 rounded-full text-xs font-medium bg-accentpurple/20 text-accentcyan border border-accentpurple/30 mb-4">
+                    <i data-lucide="sparkles" class="w-3.5 h-3.5 mr-1"></i> Hosted & Managed by Baraa (baraagp64)
+                </span>
+                <h2 class="text-3xl sm:text-5xl font-extrabold tracking-tight text-white mb-4">
+                    Play Epic <span class="bg-gradient-to-r from-accentcyan to-accentpurple bg-clip-text text-transparent">Retro & Modern</span> Games Instantly
+                </h2>
+                <p class="text-gray-400 text-sm sm:text-base mb-6">
+                    Welcome to your ultimate multiplayer arcade platform! Explore legendary titles like Level Devil, Crazy Taxi, Classic FIFA, Crash CTR, and DOS epics. Friends can join, play, and search anytime!
+                </p>
+                <div class="flex flex-wrap gap-4">
+                    <button onclick="playFeaturedGame()" class="px-6 py-3 bg-accentpurple hover:bg-accentpurple/80 text-white font-bold rounded-xl transition-all shadow-lg glow-purple flex items-center space-x-2">
+                        <i data-lucide="play" class="w-5 h-5"></i>
+                        <span>Play Featured Game</span>
+                    </button>
+                    <button onclick="scrollToCatalog()" class="px-6 py-3 bg-gray-800 hover:bg-gray-700 text-white font-bold rounded-xl border border-gray-700 transition-all flex items-center space-x-2">
+                        <i data-lucide="layers" class="w-5 h-5"></i>
+                        <span>Explore Catalog</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Categories Filter -->
+    <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full mb-8">
+        <div class="flex items-center space-x-2 overflow-x-auto pb-2 scrollbar-none" id="categoryTabs">
+            <button onclick="filterCategory('All')" class="category-btn px-4 py-2 rounded-xl text-sm font-semibold whitespace-nowrap bg-accentpurple text-white transition-all shadow-md">All Games</button>
+            <button onclick="filterCategory('Platformer')" class="category-btn px-4 py-2 rounded-xl text-sm font-semibold whitespace-nowrap bg-cardbg border border-gray-800 text-gray-300 hover:border-accentpurple transition-all">Platformer</button>
+            <button onclick="filterCategory('Arcade')" class="category-btn px-4 py-2 rounded-xl text-sm font-semibold whitespace-nowrap bg-cardbg border border-gray-800 text-gray-300 hover:border-accentpurple transition-all">Arcade & Racing</button>
+            <button onclick="filterCategory('Sports')" class="category-btn px-4 py-2 rounded-xl text-sm font-semibold whitespace-nowrap bg-cardbg border border-gray-800 text-gray-300 hover:border-accentpurple transition-all">Sports</button>
+            <button onclick="filterCategory('Retro DOS')" class="category-btn px-4 py-2 rounded-xl text-sm font-semibold whitespace-nowrap bg-cardbg border border-gray-800 text-gray-300 hover:border-accentpurple transition-all">Retro DOS</button>
+            <button onclick="filterCategory('Custom Uploads')" class="category-btn px-4 py-2 rounded-xl text-sm font-semibold whitespace-nowrap bg-cardbg border border-gray-800 text-accentcyan hover:border-accentcyan transition-all flex items-center space-x-1">
+                <i data-lucide="upload-cloud" class="w-4 h-4 mr-1"></i> Baraa's Custom Uploads
+            </button>
+        </div>
+    </section>
+
+    <!-- Game Grid Section -->
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full flex-1 mb-16" id="catalogSection">
+        <div class="flex justify-between items-center mb-6">
+            <h3 class="text-xl font-bold text-white flex items-center space-x-2">
+                <i data-lucide="cpu" class="w-5 h-5 text-accentcyan"></i>
+                <span id="currentCategoryTitle">Game Catalog</span>
+                <span id="gameCountBadge" class="text-xs px-2.5 py-0.5 rounded-full bg-gray-800 text-gray-400">0 games</span>
+            </h3>
+        </div>
+
+        <div id="gamesGrid" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+            <!-- Populated via JavaScript -->
+        </div>
+
+        <!-- Empty state -->
+        <div id="emptyState" class="hidden text-center py-16">
+            <div class="w-16 h-16 bg-gray-900 rounded-2xl flex items-center justify-center mx-auto mb-4 border border-gray-800 text-gray-500">
+                <i data-lucide="search-x" class="w-8 h-8"></i>
+            </div>
+            <h4 class="text-lg font-bold text-white mb-2">No games found</h4>
+            <p class="text-gray-400 text-sm">Try searching for something else or ask Baraa to upload this game in the Console!</p>
+        </div>
+    </main>
+
+    <!-- Game Player Modal / Emulator Window -->
+    <div id="gameModal" class="fixed inset-0 z-50 hidden bg-black/90 backdrop-blur-md flex flex-col">
+        <div class="bg-darkbg border-b border-gray-800 px-6 py-4 flex items-center justify-between">
+            <div class="flex items-center space-x-3">
+                <div class="w-8 h-8 rounded-lg bg-accentpurple/20 border border-accentpurple/40 flex items-center justify-center">
+                    <i data-lucide="gamepad-2" class="w-4 h-4 text-accentpurple"></i>
+                </div>
+                <div>
+                    <h3 id="modalGameTitle" class="text-lg font-bold text-white">Game Title</h3>
+                    <p id="modalGameCategory" class="text-xs text-accentcyan">Category</p>
+                </div>
+            </div>
+            <div class="flex items-center space-x-3">
+                <button onclick="toggleFullscreen()" title="Fullscreen" class="p-2 bg-gray-800 hover:bg-gray-700 rounded-xl text-gray-300 transition-all">
+                    <i data-lucide="maximize-2" class="w-5 h-5"></i>
+                </button>
+                <button onclick="closeGameModal()" title="Close" class="p-2 bg-red-500/20 hover:bg-red-500/30 text-red-400 border border-red-500/30 rounded-xl transition-all">
+                    <i data-lucide="x" class="w-5 h-5"></i>
+                </button>
+            </div>
+        </div>
+
+        <div class="flex-1 relative flex items-center justify-center p-4 bg-black/50" id="gameContainerWrapper">
+            <!-- Emulator or HTML5 Wrapper Container -->
+            <div id="gameEmbedContainer" class="w-full h-full max-w-5xl max-h-[80vh] bg-gray-950 rounded-2xl border border-gray-800 overflow-hidden flex flex-col items-center justify-center relative shadow-2xl">
+                <!-- Dynamic Content injected here -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Admin Console Modal (Baraa's Private Control Panel) -->
+    <div id="adminModal" class="fixed inset-0 z-50 hidden bg-black/80 backdrop-blur-sm flex items-center justify-center p-4">
+        <div class="bg-cardbg border border-gray-800 rounded-3xl max-w-2xl w-full max-h-[90vh] overflow-y-auto p-6 sm:p-8 shadow-2xl relative">
+            <button onclick="toggleAdminModal(false)" class="absolute top-6 right-6 text-gray-400 hover:text-white p-2 rounded-xl bg-gray-900 border border-gray-800">
+                <i data-lucide="x" class="w-5 h-5"></i>
+            </button>
+
+            <!-- Authentication View or Dashboard View -->
+            <div id="adminAuthView">
+                <div class="text-center mb-6">
+                    <div class="w-12 h-12 bg-accentpurple/20 border border-accentpurple/40 rounded-2xl flex items-center justify-center mx-auto mb-3 glow-purple">
+                        <i data-lucide="shield-check" class="w-6 h-6 text-accentpurple"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-white">Baraa's Admin Console</h3>
+                    <p class="text-xs text-gray-400 mt-1">Authorized host access only. Enter admin passcode to inject custom games for everyone.</p>
+                </div>
+                
+                <form onsubmit="handleAdminLogin(event)" class="space-y-4 max-w-md mx-auto">
+                    <div>
+                        <label class="block text-xs font-semibold text-gray-400 mb-1">ADMIN PASSCODE (Default: baraa64)</label>
+                        <input type="password" id="adminPasscode" placeholder="Enter passcode..." required
+                            class="w-full px-4 py-3 bg-gray-900 border border-gray-800 rounded-xl text-sm focus:outline-none focus:border-accentpurple text-white">
+                    </div>
+                    <button type="submit" class="w-full py-3 bg-gradient-to-r from-accentpurple to-accentcyan hover:opacity-90 font-bold text-white rounded-xl shadow-lg transition-all">
+                        Unlock Console
+                    </button>
+                    <p class="text-center text-xs text-gray-500 mt-2">Hint: passcode is <span class="text-accentcyan font-mono">baraa64</span></p>
+                </form>
+            </div>
+
+            <div id="adminDashboardView" class="hidden">
+                <div class="flex items-center justify-between mb-6 border-b border-gray-800 pb-4">
+                    <div class="flex items-center space-x-3">
+                        <div class="w-10 h-10 rounded-xl bg-accentcyan/20 border border-accentcyan/40 flex items-center justify-center">
+                            <i data-lucide="terminal" class="w-5 h-5 text-accentcyan"></i>
+                        </div>
+                        <div>
+                            <h3 class="text-lg font-bold text-white">Console Control Panel</h3>
+                            <p class="text-xs text-accentcyan">Welcome back, Baraa! Live catalog injector active.</p>
+                        </div>
+                    </div>
+                    <button onclick="lockAdmin()" class="text-xs px-3 py-1.5 bg-red-500/20 text-red-400 border border-red-500/30 rounded-xl hover:bg-red-500/30">
+                        Lock Console
+                    </button>
+                </div>
+
+                <!-- Custom Game Injector Form -->
+                <form id="gameUploadForm" onsubmit="handleGameUpload(event)" class="space-y-4">
+                    <h4 class="text-sm font-bold text-white uppercase tracking-wider mb-2 flex items-center space-x-2">
+                        <i data-lucide="plus-circle" class="w-4 h-4 text-accentpurple"></i>
+                        <span>Inject New Game File / Embed</span>
+                    </h4>
+
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        <div>
+                            <label class="block text-xs font-semibold text-gray-400 mb-1">Game Title</label>
+                            <input type="text" id="newGameTitle" placeholder="e.g. Super Mario 64 Web" required
+                                class="w-full px-4 py-2.5 bg-gray-900 border border-gray-800 rounded-xl text-sm text-white focus:outline-none focus:border-accentpurple">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-semibold text-gray-400 mb-1">Category</label>
+                            <select id="newGameCategory" class="w-full px-4 py-2.5 bg-gray-900 border border-gray-800 rounded-xl text-sm text-white focus:outline-none focus:border-accentpurple">
+                                <option value="Custom Uploads">Custom Uploads</option>
+                                <option value="Platformer">Platformer</option>
+                                <option value="Arcade">Arcade & Racing</option>
+                                <option value="Sports">Sports</option>
+                                <option value="Retro DOS">Retro DOS</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div>
+                        <label class="block text-xs font-semibold text-gray-400 mb-1">Game Type</label>
+                        <select id="newGameType" onchange="toggleUploadInputs()" class="w-full px-4 py-2.5 bg-gray-900 border border-gray-800 rounded-xl text-sm text-white focus:outline-none focus:border-accentpurple">
+                            <option value="iframe">External URL / Embed Link (Iframe)</option>
+                            <option value="html5zip">HTML5 / JS App Code or File</option>
+                            <option value="dos">DOS Game Emulator Wrapper</option>
+                        </select>
+                    </div>
+
+                    <div id="urlInputContainer">
+                        <label class="block text-xs font-semibold text-gray-400 mb-1">Game Embed URL / Source URL</label>
+                        <input type="url" id="newGameUrl" placeholder="https://example.com/embed-game" 
+                            class="w-full px-4 py-2.5 bg-gray-900 border border-gray-800 rounded-xl text-sm text-white focus:outline-none focus:border-accentpurple">
+                    </div>
+
+                    <div id="fileInputContainer" class="hidden">
+                        <label class="block text-xs font-semibold text-gray-400 mb-1">Upload Game File / ZIP or Custom Script</label>
+                        <input type="file" id="newGameFile" accept=".zip,.html,.js"
+                            class="w-full px-4 py-2 bg-gray-900 border border-gray-800 rounded-xl text-sm text-gray-400 file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-xs file:font-semibold file:bg-accentpurple file:text-white hover:file:bg-accentpurple/80">
+                    </div>
+
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        <div>
+                            <label class="block text-xs font-semibold text-gray-400 mb-1">Cover Image URL</label>
+                            <input type="url" id="newGameImage" placeholder="https://images.unsplash.com/..." 
+                                class="w-full px-4 py-2.5 bg-gray-900 border border-gray-800 rounded-xl text-sm text-white focus:outline-none focus:border-accentpurple">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-semibold text-gray-400 mb-1">Short Description</label>
+                            <input type="text" id="newGameDesc" placeholder="Brief gameplay description..." required
+                                class="w-full px-4 py-2.5 bg-gray-900 border border-gray-800 rounded-xl text-sm text-white focus:outline-none focus:border-accentpurple">
+                        </div>
+                    </div>
+
+                    <button type="submit" class="w-full py-3 bg-gradient-to-r from-accentcyan to-accentpurple hover:opacity-90 font-bold text-white rounded-xl shadow-lg transition-all flex items-center justify-center space-x-2">
+                        <i data-lucide="upload" class="w-5 h-5"></i>
+                        <span>Publish Game Live for All Friends</span>
+                    </button>
+                </form>
+
+                <div class="mt-8 pt-6 border-t border-gray-800">
+                    <h4 class="text-sm font-bold text-white mb-3">Manage Published Games</h4>
+                    <div id="adminGamesList" class="space-y-2 max-h-48 overflow-y-auto">
+                        <!-- Dynamic list -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-darkbg border-t border-gray-800 py-8 px-4 text-center text-gray-500 text-xs mt-auto">
+        <div class="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4">
+            <div class="flex items-center space-x-2">
+                <div class="w-6 h-6 rounded-lg bg-gradient-to-tr from-accentpurple to-accentcyan flex items-center justify-center">
+                    <i data-lucide="Gamepad2" class="w-3.5 h-3.5 text-white"></i>
+                </div>
+                <span class="font-bold text-gray-300">baraagp64 Gaming Hub</span>
+            </div>
+            <p>Built for Baraa and friends. Play anywhere, anytime.</p>
+            <p class="text-accentcyan font-mono">v2.4 Live Online Edition</p>
+        </div>
+    </footer>
+
+    <!-- JavaScript Application Logic -->
+    <script>
+        // Initial pre-loaded game catalog specified by Baraa
+        const defaultGames = [
+            {
+                id: 'level-devil',
+                title: 'Level Devil',
+                category: 'Platformer',
+                type: 'iframe',
+                url: 'https://html5.gamedistribution.com/rvvASMiM/level-devil/index.html',
+                image: 'https://images.unsplash.com/photo-1550745165-9bc0b252726f?w=600&auto=format&fit=crop&q=80',
+                description: 'The deceptive platformer where spikes move, floors vanish, and nothing is as it seems!'
+            },
+            {
+                id: 'crazy-taxi',
+                title: 'Crazy Taxi Arcade',
+                category: 'Arcade',
+                type: 'iframe',
+                url: 'https://www.retrogames.cc/embed/41555-crazy-taxi.html',
+                image: 'https://images.unsplash.com/photo-1511512578047-dfb367046420?w=600&auto=format&fit=crop&q=80',
+                description: 'Crank up The Offspring and speed through city streets picking up frantic passengers.'
+            },
+            {
+                id: 'fifa-retro',
+                title: 'Classic FIFA Soccer',
+                category: 'Sports',
+                type: 'iframe',
+                url: 'https://www.retrogames.cc/embed/10103-fifa-international-soccer.html',
+                image: 'https://images.unsplash.com/photo-1574629810360-7efbbe195018?w=600&auto=format&fit=crop&q=80',
+                description: 'Legendary vintage football simulator that started a global revolution.'
+            },
+            {
+                id: 'crash-ctr',
+                title: 'Crash CTR Kart Racing',
+                category: 'Arcade',
+                type: 'iframe',
+                url: 'https://www.retrogames.cc/embed/39839-crash-team-racing.html',
+                image: 'https://images.unsplash.com/photo-1511919884226-fd3cad34687c?w=600&auto=format&fit=crop&q=80',
+                description: 'Race with Crash Bandicoot, Wumpa fruits, and power-up crates in this iconic kart racer.'
+            },
+            {
+                id: 'shadow-knight',
+                title: 'Shadow of Knight DOS',
+                category: 'Retro DOS',
+                type: 'dos',
+                url: 'dos-game',
+                image: 'https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=600&auto=format&fit=crop&q=80',
+                description: 'Immersive retro DOS dungeon crawler and dark knight adventure.'
+            },
+            {
+                id: 'pac-retro',
+                title: 'Retro Arcade Pac',
+                category: 'Arcade',
+                type: 'iframe',
+                url: 'https://pacman.live/',
+                image: 'https://images.unsplash.com/photo-1538481199705-c710c4e965fc?w=600&auto=format&fit=crop&q=80',
+                description: 'Eat dots, dodge colorful ghosts, and master the arcade labyrinth.'
+            }
+        ];
+
+        // Load games from localStorage or fallback to default
+        let gamesCatalog = JSON.parse(localStorage.getItem('baraagp64_games')) || defaultGames;
+        let currentFilter = 'All';
+        let searchQuery = '';
+
+        // Initialize Lucide icons
+        window.addEventListener('DOMContentLoaded', () => {
+            lucide.createIcons();
+            renderGames();
+            
+            // Search listeners
+            document.getElementById('searchInput').addEventListener('input', (e) => {
+                searchQuery = e.target.value.toLowerCase();
+                renderGames();
+            });
+            document.getElementById('mobileSearchInput').addEventListener('input', (e) => {
+                searchQuery = e.target.value.toLowerCase();
+                renderGames();
+            });
+        });
+
+        function renderGames() {
+            const grid = document.getElementById('gamesGrid');
+            const emptyState = document.getElementById('emptyState');
+            const badge = document.getElementById('gameCountBadge');
+            const categoryTitle = document.getElementById('currentCategoryTitle');
+
+            categoryTitle.innerText = currentFilter === 'All' ? 'Game Catalog' : currentFilter;
+
+            let filtered = gamesCatalog.filter(game => {
+                const matchesCategory = currentFilter === 'All' || game.category === currentFilter;
+                const matchesSearch = game.title.toLowerCase().includes(searchQuery) || game.description.toLowerCase().includes(searchQuery);
+                return matchesCategory && matchesSearch;
+            });
+
+            badge.innerText = `${filtered.length} games`;
+
+            if (filtered.length === 0) {
+                grid.innerHTML = '';
+                emptyState.classList.remove('hidden');
+                return;
+            }
+
+            emptyState.classList.add('hidden');
+            grid.innerHTML = filtered.map(game => `
+                <div class="bg-cardbg border border-gray-800 hover:border-accentpurple/60 rounded-2xl overflow-hidden flex flex-col transition-all duration-300 hover:shadow-xl hover:glow-purple group">
+                    <div class="relative h-44 overflow-hidden bg-gray-900">
+                        <img src="${game.image}" alt="${game.title}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" onerror="this.src='https://placehold.co/600x400/131520/8b5cf6?text=Baraa+Game'">
+                        <div class="absolute top-3 left-3 bg-darkbg/80 backdrop-blur-md px-2.5 py-1 rounded-lg text-xs font-semibold text-accentcyan border border-gray-800">
+                            ${game.category}
+                        </div>
+                    </div>
+                    <div class="p-5 flex-1 flex flex-col justify-between">
+                        <div>
+                            <h4 class="text-base font-bold text-white mb-1 group-hover:text-accentpurple transition-colors">${game.title}</h4>
+                            <p class="text-xs text-gray-400 line-clamp-2 mb-4">${game.description}</p>
+                        </div>
+                        <button onclick="launchGame('${game.id}')" class="w-full py-2.5 bg-gray-900 group-hover:bg-accentpurple text-white rounded-xl text-xs font-bold transition-all flex items-center justify-center space-x-2 border border-gray-800 group-hover:border-accentpurple">
+                            <i data-lucide="play" class="w-4 h-4 fill-current"></i>
+                            <span>Play Now</span>
+                        </button>
+                    </div>
+                </div>
+            `).join('');
+
+            lucide.createIcons();
+        }
+
+        function filterCategory(cat) {
+            currentFilter = cat;
+            document.querySelectorAll('.category-btn').forEach(btn => {
+                btn.classList.remove('bg-accentpurple', 'text-white', 'shadow-md');
+                btn.classList.add('bg-cardbg', 'border', 'border-gray-800', 'text-gray-300');
+            });
+            event && event.currentTarget && event.currentTarget.classList.remove('bg-cardbg', 'border', 'border-gray-800', 'text-gray-300');
+            event && event.currentTarget && event.currentTarget.classList.add('bg-accentpurple', 'text-white', 'shadow-md');
+            renderGames();
+        }
+
+        function scrollToCatalog() {
+            document.getElementById('catalogSection').scrollIntoView({ behavior: 'smooth' });
+        }
+
+        function playFeaturedGame() {
+            launchGame(gamesCatalog[0].id);
+        }
+
+        function launchGame(gameId) {
+            const game = gamesCatalog.find(g => g.id === gameId);
+            if (!game) return;
+
+            document.getElementById('modalGameTitle').innerText = game.title;
+            document.getElementById('modalGameCategory').innerText = game.category;
+            
+            const container = document.getElementById('gameEmbedContainer');
+            
+            if (game.type === 'dos' || game.id === 'shadow-knight') {
+                container.innerHTML = `
+                    <div class="w-full h-full flex flex-col items-center justify-center p-8 text-center bg-gray-950">
+                        <div class="w-20 h-20 rounded-3xl bg-accentcyan/20 border border-accentcyan/40 flex items-center justify-center mb-4 glow-cyan">
+                            <i data-lucide="terminal" class="w-10 h-10 text-accentcyan"></i>
+                        </div>
+                        <h3 class="text-2xl font-bold text-white mb-2">${game.title} - DOS Emulator</h3>
+                        <p class="text-gray-400 text-sm max-w-md mb-6">${game.description}</p>
+                        <div class="p-6 bg-gray-900 border border-gray-800 rounded-2xl max-w-lg w-full text-left space-y-3 font-mono text-xs text-gray-300">
+                            <p class="text-accentcyan font-bold">> MOUNT C /games/shadow</p>
+                            <p class="text-accentcyan font-bold">> C:</p>
+                            <p class="text-accentcyan font-bold">> KNIGHT.EXE</p>
+                            <p class="text-gray-500 animate-pulse pt-2">[ DOSBox v0.74-3 Initialized. Press ENTER to start simulation ]</p>
+                        </div>
+                        <button onclick="startDosGameSession()" class="mt-6 px-8 py-3 bg-gradient-to-r from-accentcyan to-accentpurple text-white font-bold rounded-xl shadow-lg hover:opacity-90 transition-all">
+                            Boot DOS Environment & Play
+                        </button>
+                    </div>
+                `;
+            } else if (game.type === 'html5zip') {
+                container.innerHTML = `
+                    <div class="w-full h-full flex items-center justify-center bg-gray-950 p-6">
+                        <div class="text-center">
+                            <h3 class="text-xl font-bold text-white mb-2">${game.title}</h3>
+                            <p class="text-sm text-gray-400 mb-6">Custom HTML5 App loaded successfully by Baraa.</p>
+                            <iframe srcdoc="${escapeHtml(game.url)}" class="w-full h-[60vh] border-0 rounded-xl bg-black"></iframe>
+                        </div>
+                    </div>
+                `;
+            } else {
+                container.innerHTML = `
+                    <iframe src="${game.url}" class="w-full h-full border-0" allowfullscreen></iframe>
+                `;
+            }
+
+            document.getElementById('gameModal').classList.remove('hidden');
+            lucide.createIcons();
+        }
+
+        function startDosGameSession() {
+            const container = document.getElementById('gameEmbedContainer');
+            container.innerHTML = `
+                <div class="w-full h-full flex flex-col items-center justify-center bg-black p-4 text-center">
+                    <div class="retro-font text-green-400 text-sm mb-4">SHADOW OF KNIGHT - ACTIVE DOS SESSION</div>
+                    <div class="w-full max-w-2xl h-[450px] bg-gray-900 border-2 border-green-500/50 rounded-lg flex flex-col items-center justify-center p-6 relative overflow-hidden">
+                        <div class="absolute inset-0 bg-[radial-gradient(#166534_1px,transparent_1px)] [background-size:16px_16px] opacity-20"></div>
+                        <div class="relative z-10 space-y-4">
+                            <div class="w-16 h-16 bg-green-500/20 border border-green-500 rounded-full flex items-center justify-center mx-auto text-green-400 animate-bounce">
+                                <i data-lucide="sword" class="w-8 h-8"></i>
+                            </div>
+                            <h4 class="text-lg font-bold text-white">Dungeon Crawler Running...</h4>
+                            <p class="text-xs text-green-400 font-mono">Use Arrow Keys to Move, Spacebar to Attack, 'E' to Interact.</p>
+                            <div class="p-4 bg-black/80 border border-green-500/40 rounded-xl text-xs text-green-300 font-mono">
+                                Player: Baraa_Guest | HP: 100/100 | Level: 1 | Gold: 50
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `;
+            lucide.createIcons();
+        }
+
+        function closeGameModal() {
+            document.getElementById('gameModal').classList.add('hidden');
+            document.getElementById('gameEmbedContainer').innerHTML = '';
+        }
+
+        function toggleFullscreen() {
+            const container = document.getElementById('gameEmbedContainer');
+            if (!document.fullscreenElement) {
+                container.requestFullscreen().catch(err => {
+                    console.error(err);
+                });
+            } else {
+                document.exitFullscreen();
+            }
+        }
+
+        function toggleAdminModal(show) {
+            const modal = document.getElementById('adminModal');
+            if (show) {
+                modal.classList.remove('hidden');
+                // Check if already logged in this session
+                if (sessionStorage.getItem('baraa_admin_auth') === 'true') {
+                    showAdminDashboard();
+                } else {
+                    showAdminAuth();
+                }
+            } else {
+                modal.classList.add('hidden');
+            }
+        }
+
+        function showAdminAuth() {
+            document.getElementById('adminAuthView').classList.remove('hidden');
+            document.getElementById('adminDashboardView').classList.add('hidden');
+        }
+
+        function showAdminDashboard() {
+            document.getElementById('adminAuthView').classList.add('hidden');
+            document.getElementById('adminDashboardView').classList.remove('hidden');
+            renderAdminGamesList();
+        }
+
+        function handleAdminLogin(e) {
+            e.preventDefault();
+            const passcode = document.getElementById('adminPasscode').value;
+            if (passcode === 'baraa64') {
+                sessionStorage.setItem('baraa_admin_auth', 'true');
+                showAdminDashboard();
+                document.getElementById('adminPasscode').value = '';
+            } else {
+                alertCustom('Incorrect passcode! Hint is baraa64');
+            }
+        }
+
+        function lockAdmin() {
+            sessionStorage.removeItem('baraa_admin_auth');
+            showAdminAuth();
+        }
+
+        function toggleUploadInputs() {
+            const type = document.getElementById('newGameType').value;
+            const urlContainer = document.getElementById('urlInputContainer');
+            const fileContainer = document.getElementById('fileInputContainer');
+
+            if (type === 'iframe' || type === 'dos') {
+                urlContainer.classList.remove('hidden');
+                fileContainer.classList.add('hidden');
+            } else {
+                urlContainer.classList.add('hidden');
+                fileContainer.classList.remove('hidden');
+            }
+        }
+
+        function handleGameUpload(e) {
+            e.preventDefault();
+            const title = document.getElementById('newGameTitle').value;
+            const category = document.getElementById('newGameCategory').value;
+            const type = document.getElementById('newGameType').value;
+            let url = document.getElementById('newGameUrl').value;
+            const image = document.getElementById('newGameImage').value || 'https://images.unsplash.com/photo-1550745165-9bc0b252726f?w=600&auto=format&fit=crop&q=80';
+            const description = document.getElementById('newGameDesc').value;
+
+            const fileInput = document.getElementById('newGameFile');
+            if (type === 'html5zip' && fileInput.files.length > 0) {
+                url = '<h1>Custom App Running</h1>'; // Mock script wrapper
+            }
+
+            const newGame = {
+                id: 'game-' + Date.now(),
+                title,
+                category,
+                type,
+                url: url || 'https://html5.gamedistribution.com/rvvASMiM/level-devil/index.html',
+                image,
+                description
+            };
+
+            gamesCatalog.unshift(newGame);
+            localStorage.setItem('baraagp64_games', JSON.stringify(gamesCatalog));
+
+            renderGames();
+            renderAdminGamesList();
+            document.getElementById('gameUploadForm').reset();
+            alertCustom('Game successfully published live for all visitors and friends!');
+        }
+
+        function renderAdminGamesList() {
+            const list = document.getElementById('adminGamesList');
+            list.innerHTML = gamesCatalog.map(game => `
+                <div class="flex items-center justify-between p-3 bg-gray-900 rounded-xl border border-gray-800 text-xs">
+                    <div class="flex items-center space-x-3">
+                        <img src="${game.image}" class="w-10 h-10 rounded-lg object-cover" onerror="this.src='https://placehold.co/100x100'">
+                        <div>
+                            <p class="font-bold text-white">${game.title}</p>
+                            <p class="text-accentcyan">${game.category}</p>
+                        </div>
+                    </div>
+                    <button onclick="deleteGame('${game.id}')" class="p-2 bg-red-500/20 hover:bg-red-500/30 text-red-400 rounded-lg">
+                        <i data-lucide="trash-2" class="w-4 h-4"></i>
+                    </button>
+                </div>
+            `).join('');
+            lucide.createIcons();
+        }
+
+        function deleteGame(id) {
+            gamesCatalog = gamesCatalog.filter(g => g.id !== id);
+            localStorage.setItem('baraagp64_games', JSON.stringify(gamesCatalog));
+            renderGames();
+            renderAdminGamesList();
+        }
+
+        function alertCustom(msg) {
+            alert(msg); // Fallback standard
+        }
+
+        function escapeHtml(text) {
+            return text.replace(/"/g, '&quot;');
+        }
+    </script>
+</body>
+</html>
